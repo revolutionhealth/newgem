@@ -7,7 +7,8 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 GEM = "<%= name %>"
-revision = `svn info`.match(/Revision: (\d+)/)[1] 
+REVISION = 0
+revision = `svn info`.match(/Revision: (\d+)/)[1] rescue REVISION
 GEM_VERSION = "2.0.#{revision}"
 AUTHOR = "Revolution Health"
 EMAIL = "rails@revolutionhealth.com"
