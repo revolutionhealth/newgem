@@ -31,6 +31,8 @@ app_generators/newgem_simple/templates/TODO
 app_generators/newgem_simple/templates/lib/templates.rb
 app_generators/newgem_simple/templates/spec/spec_helper.rb
 app_generators/newgem_simple/templates/spec/templates_spec.rb.erb
+app_generators/newgem_simple/templates/test/templates_test.rb.erb
+app_generators/newgem_simple/templates/test/test_helper.rb
 bin/newgem
 bundles/RubyGem.tmbundle/Snippets/History header trunk.tmSnippet
 bundles/RubyGem.tmbundle/Snippets/History header.tmSnippet

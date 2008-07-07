@@ -2,12 +2,16 @@ require 'rubygems'
 require 'rake/gempackagetask'
 require 'rubygems/specification'
 require 'date'
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
 
 GEM = "<%= name %>"
-GEM_VERSION = "0.0.1"
-AUTHOR = "Your Name"
-EMAIL = "Your Email"
-HOMEPAGE = "http://example.com"
+revision = `svn info`.match(/Revision: (\d+)/)[1] 
+GEM_VERSION = "2.0.#{revision}"
+AUTHOR = "Revolution Health"
+EMAIL = "rails@revolutionhealth.com"
+HOMEPAGE = "https://github.com/revolutionhealth"
 SUMMARY = "A gem that provides..."
 
 spec = Gem::Specification.new do |s|
@@ -44,4 +48,24 @@ task :make_spec do
   File.open("#{GEM}.gemspec", "w") do |file|
     file.puts spec.to_ruby
   end
+end
+
+
+desc 'Default: run unit tests.'
+task :default => :test
+
+desc "Test the #{GEM} plugin."
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.pattern = ['test/*_test.rb', 'test/**/*_test.rb']
+  t.verbose = true
+end
+
+desc "Generate documentation for the #{GEM} plugin."
+Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title    = GEM
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.rdoc_files.include('README')
+  rdoc.rdoc_files.include('lib/**/*.rb')
 end

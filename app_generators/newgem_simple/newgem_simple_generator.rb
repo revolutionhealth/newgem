@@ -25,9 +25,11 @@ class NewgemSimpleGenerator < RubiGen::Base
       # m.template "template.rb",  "some_file_after_erb.rb"
       m.file "lib/templates.rb", "lib/#{name}.rb"
       m.template "spec/templates_spec.rb.erb", "spec/#{name}_spec.rb"
+      m.template "test/templates_test.rb.erb", "test/#{name}_test.rb"
+      
       
       %w[ LICENSE Rakefile README.rdoc ].each {|file| m.template file, file}
-      %w[ TODO spec/spec_helper.rb ].each {|file| m.file file, file }      
+      %w[ TODO spec/spec_helper.rb test/test_helper.rb ].each {|file| m.file file, file }      
       
       m.dependency "install_rubigen_scripts", [destination_root, 'newgem_simple'], 
         :shebang => options[:shebang], :collision => :force
@@ -66,5 +68,6 @@ EOS
     BASEDIRS = %w(
       lib
       spec
+      test
     )
 end
